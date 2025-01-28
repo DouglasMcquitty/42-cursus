@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 14:10:41 by marvin            #+#    #+#             */
-/*   Updated: 2025/01/28 14:10:41 by marvin           ###   ########.fr       */
+/*   Created: 2025/01/28 14:19:44 by marvin            #+#    #+#             */
+/*   Updated: 2025/01/28 14:19:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))
+void ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	size_t	i;
-	char	*tmp;
+    unsigned int i;
 
-	if (!s || !f ||
-			!(tmp = (char *)malloc(sizeof(char) * (ft_strlen((char *)s) + 1))))
-		return (NULL);
-	i = 0;
-	while (i < (ft_strlen((char *)s)))
-	{
-		tmp[i] = f(i, s[i]);
-		i++;
-	}
-	tmp[i] = '\0';
-	return (tmp);
+    if (!s || !f) // Comprueba si el string o la función son NULL
+        return;
+
+    i = 0;
+    while (s[i]) // Itera sobre cada carácter de la cadena
+    {
+        f(i, &s[i]); // Aplica la función pasada como parámetro
+        i++;
+    }
 }
